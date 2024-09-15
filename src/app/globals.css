@@ -3,31 +3,85 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    @apply bg-white text-black;
+    --sb-track-color: #FFF;
+
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.dark body {
+    @apply bg-black text-white;
+    --sb-track-color: #171819;
+
+}
+
+body {
+
+    scroll-behavior: smooth;
+    --sb-thumb-color: #10cb8a;
+    --sb-size: 6px;
+
+}
+
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .controller-item::after {
+        width: 80px;
+        height: 40px;
+        position: absolute;
+        content: attr(data-text);
+        display: flex;
+        align-items: center;
+        top: -10px;
+        left: 50px;
+        border-radius: 1.5rem;
+        background: transparent;
+        transform: translateX(-2%);
+        opacity: 0;
+        color: #000;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .dark .controller-item::after {
+        color: #FFF;
+
+    }
+
+    .controller-item:hover::after {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
