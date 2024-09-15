@@ -11,7 +11,7 @@ export default function Controller() {
       setDarkMode(JSON.parse(savedDarkMode));
     }
   }, []);
-  const handleDarkMode = (value) => {
+  const handleDarkMode = (value: any) => {
     setDarkMode(value);
     localStorage.setItem("darkMode", JSON.stringify(value));
   };
